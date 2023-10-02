@@ -12,8 +12,10 @@ const Slider = () => {
   );
   const nextCard = () => {
     setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
-      5000
+      () => {
+        if(byDateDesc != null)
+        setIndex(index < byDateDesc.length - 1 ? index + 1 : 0)
+      },5000
     );
   };
   useEffect(() => {
@@ -42,10 +44,11 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={_.date}
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  checked={index === radioIdx}
+                  onChange={()=>setIndex(radioIdx)}
                 />
               ))}
             </div>
